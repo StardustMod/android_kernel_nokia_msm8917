@@ -872,8 +872,8 @@ struct hid_report *hid_validate_values(struct hid_device *hid,
 		 * Validating on id 0 means we should examine the first
 		 * report in the list.
 		 */
-		report = list_entry(
-				hid->report_enum[type].report_list.next,
+		report = list_first_entry_or_null(
+				&hid->report_enum[type].report_list,
 				struct hid_report, list);
 	} else {
 		report = hid->report_enum[type].report_id_hash[id];
@@ -1095,7 +1095,6 @@ static void implement(const struct hid_device *hid, __u8 *report,
 	if (value > m)
 		hid_warn(hid, "%s() called with too large value %d! (%s)\n",
 			 __func__, value, current->comm);
-	WARN_ON(value > m);
 	value &= m;
 
 	report += offset >> 3;

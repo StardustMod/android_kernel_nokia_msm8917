@@ -217,6 +217,8 @@ static int llc_ui_release(struct socket *sock)
 	if (llc->dev)
 		dev_put(llc->dev);
 	sock_put(sk);
+	sock_orphan(sk);
+	sock->sk = NULL;
 	llc_sk_free(sk);
 out:
 	return 0;
@@ -301,6 +303,10 @@ static int llc_ui_autobind(struct socket *sock, struct sockaddr_llc *addr)
 	sock_reset_flag(sk, SOCK_ZAPPED);
 	rc = 0;
 out:
+	if (rc) {
+		dev_put(llc->dev);
+		llc->dev = NULL;
+	}
 	return rc;
 }
 
@@ -400,6 +406,10 @@ static int llc_ui_bind(struct socket *sock, struct sockaddr *uaddr, int addrlen)
 out_put:
 	llc_sap_put(sap);
 out:
+	if (rc) {
+		dev_put(llc->dev);
+		llc->dev = NULL;
+	}
 	release_sock(sk);
 	return rc;
 }

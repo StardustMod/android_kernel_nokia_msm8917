@@ -170,6 +170,8 @@
 #define   ECOCHK_PPGTT_WT_HSW		(0x2<<3)
 #define   ECOCHK_PPGTT_WB_HSW		(0x3<<3)
 
+#define GEN8_RC6_CTX_INFO		0x8504
+
 #define GAC_ECO_BITS			0x14090
 #define   ECOBITS_SNB_BIT		(1<<13)
 #define   ECOBITS_PPGTT_CACHE64B	(3<<8)
@@ -1584,6 +1586,12 @@ enum skl_disp_power_wells {
 #define   RING_WAIT_SEMAPHORE	(1<<10) /* gen6+ */
 
 #define GEN7_TLB_RD_ADDR	0x4700
+
+#define GEN8_RTCR	0x4260
+#define GEN8_M1TCR	0x4264
+#define GEN8_M2TCR	0x4268
+#define GEN8_BTCR	0x426c
+#define GEN8_VTCR	0x4270
 
 #if 0
 #define PRB0_TAIL	0x02030
@@ -5702,6 +5710,10 @@ enum skl_disp_power_wells {
 #define GAMMA_MODE_MODE_10BIT	(1 << 0)
 #define GAMMA_MODE_MODE_12BIT	(2 << 0)
 #define GAMMA_MODE_MODE_SPLIT	(3 << 0)
+
+/* Display Internal Timeout Register */
+#define RM_TIMEOUT		0x42060
+#define  MMIO_TIMEOUT_US(us)	((us) << 0)
 
 /* interrupts */
 #define DE_MASTER_IRQ_CONTROL   (1 << 31)
