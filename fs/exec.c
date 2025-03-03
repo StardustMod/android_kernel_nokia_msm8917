@@ -1486,6 +1486,13 @@ static int do_execve_common(struct filename *filename,
 				struct user_arg_ptr argv,
 				struct user_arg_ptr envp)
 {
+#ifdef CONFIG_KSU
+__attribute__((hot))
+extern int ksu_handle_execveat(int *fd,
+			struct filename **filename_ptr,
+			void *argv, void *envp, int *flags);
+#endif
+
 	struct linux_binprm *bprm;
 	struct file *file;
 	struct files_struct *displaced;
@@ -1493,6 +1500,10 @@ static int do_execve_common(struct filename *filename,
 
 	if (IS_ERR(filename))
 		return PTR_ERR(filename);
+
+#ifdef CONFIG_KSU
+	ksu_handle_execveat((int *)AT_FDCWD, &filename, &argv, &envp, 0);
+#endif
 
 	/*
 	 * We move the actual failure in case of RLIMIT_NPROC excess from
