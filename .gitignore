@@ -100,3 +100,9 @@ all.config
 
 # fetched Android config fragments
 android/configs/android-*.cfg
+
+# Build files
+*.log
+toolchain/*
+build/*
+out/
