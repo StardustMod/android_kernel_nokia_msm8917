@@ -307,7 +307,7 @@ ramdisk ()
     mv ../../../out/arch/arm/boot/zImage-dtb boot.img-kernel
     echo -e "0x80000000" > boot.img-base
     echo -e "" > boot.img-board
-    echo -e "console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom androidboot.memcg=true user_debug=30 msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlycon=msm_hsl_uart,0x78B0000 loop.max_part=7 loglevel=0 loglevel=0 buildvariant=user veritykeyid=id:8f56f02c61394639f13af4e8cfe02d087e41b936" > boot.img-cmdline
+    echo -e "console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom androidboot.memcg=true user_debug=30 msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlycon=msm_hsl_uart,0x78B0000 loop.max_part=7 loglevel=0 loglevel=0 buildvariant=user" > boot.img-cmdline
     echo -e "sha1" > boot.img-hashtype
     echo -e "0" > boot.img-header_version
     echo -e "AOSP" > boot.img-imgtype
